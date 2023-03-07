@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCurso;//Controller to use "StoreCurso"
 use App\Models\Curso;
 use Illuminate\Http\Request;
 use Symfony\Contracts\Service\Attribute\Required;
@@ -24,13 +25,16 @@ class cursoController extends Controller
         return view('cursos.show', ['curso'=>$curso]);
     }
 
-    public function store(Request $request){
+    public function store(StoreCurso $request){
+
+        /* request moved to "StoreCurso"
         //return $request->all(); this prints all the requested information in json but doesnt do anything
         $request->validate([//This works as an if, where if our info is empty, it returns
             'name' => 'required|max:10',
             'description' => 'required|min:10',
             'category' => 'required'
         ]);
+        */
         
         $curso = new Curso();
         $curso->name = $request->name;
