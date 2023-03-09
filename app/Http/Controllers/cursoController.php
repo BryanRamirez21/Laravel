@@ -35,12 +35,24 @@ class cursoController extends Controller
             'category' => 'required'
         ]);
         */
-        
+
+        /* method reduced in order to save this or more fields in less code
         $curso = new Curso();
         $curso->name = $request->name;
         $curso->description = $request->description;
         $curso->category = $request->category;
         $curso->save();
+        */
+
+        /* Save all fields, 1° way
+        $curso = Curso::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'category' => $request->category
+        ]);
+        */
+
+        $curso = Curso::create($request->all());//this saves in an array all info
 
         return redirect()->route('cursos.category', $curso);
     }
@@ -63,11 +75,21 @@ class cursoController extends Controller
             'category' => 'required'
         ]);
         
+        /*this is for the massive migration, vid 20; to save all the info in less code
         $curso->name = $request->name;
         $curso->description = $request->description;
         $curso->category = $request->category;
 
         $curso->save();
+        */
+
+        $curso->update($request->all());
         return redirect()->route('cursos.category', $curso);
+    }
+
+    public function destroy(Curso $curso){
+        $curso->delete();
+
+        return redirect()->route('cursos.index');
     }
 }

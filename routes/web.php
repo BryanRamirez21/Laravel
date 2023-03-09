@@ -62,4 +62,5 @@ Route::controller(cursoController::class)->group(function(){
     Route::post('cursos', 'store')->name('cursos.store');
     Route::get('cursos/{curso}/edit', 'edit')->name('cursos.edit');
     Route::put('cursos/{curso}', 'update')->name('cursos.update');
+    Route::delete('cursos/{curso}', 'destroy')->name('cursos.destroy');
 });
